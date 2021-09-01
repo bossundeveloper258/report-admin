@@ -25,6 +25,11 @@ export const AppRoutes: Routes = [
     component: LoginComponent
   },
   {
+    path: '',
+    redirectTo: 'reports',
+    pathMatch: 'full',
+  },
+  {
       path: '',
       component: AdminLayoutComponent,
       children: [

@@ -1,202 +1,116 @@
 <div class="row">
-  <div class="col-md-4">
-    <div class="card card-user">
-      <div class="image">
-        <img src="assets/img/damir-bosnjak.jpg" alt="...">
-      </div>
-      <div class="card-body">
-        <div class="author">
-          <a href="#">
-            <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
-            <h5 class="title">Chet Faker</h5>
-          </a>
-          <p class="description">
-            @chetfaker
-          </p>
-        </div>
-        <p class="description text-center">
-          "I like the way you work it
-          <br> No diggity
-          <br> I wanna bag it up"
-        </p>
-      </div>
-      <div class="card-footer">
-        <hr>
-        <div class="button-container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-6 ml-auto">
-              <h5>12
-                <br>
-                <small>Files</small>
-              </h5>
-            </div>
-            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-              <h5>2GB
-                <br>
-                <small>Used</small>
-              </h5>
-            </div>
-            <div class="col-lg-3 mr-auto">
-              <h5>24,6$
-                <br>
-                <small>Spent</small>
-              </h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="col-sm-12">
     <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Team Members</h4>
+      <div class="card-header text-right">
+        <a class="btn btn-primary" [routerLink]="'/user/add'">Agregar Usuario</a>
       </div>
       <div class="card-body">
-        <ul class="list-unstyled team-members">
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                DJ Khaled
-                <br />
-                <span class="text-muted">
-                  <small>Offline</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                Creative Tim
-                <br />
-                <span class="text-success">
-                  <small>Available</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-ms-7 col-7">
-                Flume
-                <br />
-                <span class="text-danger">
-                  <small>Busy</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Codigo</th>
+              <th>Fecha</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>DNI</th>
+              <th>Categoria</th>
+              <th>Telefono</th>
+              <th></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let u of users">
+                <td>{{u.uid}}</td>
+                <td>{{u.date | date:'yyyy-MMM-dd' }}</td>
+                <td>{{u.name}}</td>
+                <td>{{u.lastname}}</td>
+                <td>{{u.dni}}</td>
+                <td>{{u.categoryName}}</td>
+                <td>{{u.phone}}</td>
+                <td style="font-size: 18px;">
+                  <i [routerLink]="'/user/'+u.uid" class="nc-icon nc-single-02"></i>
+                  <i class="nc-icon nc-simple-remove"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-8">
-    <div class="card card-user">
-      <div class="card-header">
-        <h5 class="card-title">Edit Profile</h5>
-      </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-5 pr-1">
-              <div class="form-group">
-                <label>Company (disabled)</label>
-                <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
-              </div>
-            </div>
-            <div class="col-md-3 px-1">
-              <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" placeholder="Username" value="michael23">
-              </div>
-            </div>
-            <div class="col-md-4 pl-1">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" placeholder="Email">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" placeholder="Company" value="Chet">
-              </div>
-            </div>
-            <div class="col-md-6 pl-1">
-              <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" placeholder="Last Name" value="Faker">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Address</label>
-                <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group">
-                <label>City</label>
-                <input type="text" class="form-control" placeholder="City" value="Melbourne">
-              </div>
-            </div>
-            <div class="col-md-4 px-1">
-              <div class="form-group">
-                <label>Country</label>
-                <input type="text" class="form-control" placeholder="Country" value="Australia">
-              </div>
-            </div>
-            <div class="col-md-4 pl-1">
-              <div class="form-group">
-                <label>Postal Code</label>
-                <input type="number" class="form-control" placeholder="ZIP Code">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>About Me</label>
-                <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  
 </div>
+
+
+<ng-template #adduser let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">Nuevo Usuario</h4>
+      <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <form [formGroup]="userForm">
+        <div class="row">
+          <div class="col-lg-6">
+            <label for="username">Usuario:</label>
+            <input type="text" formControlName="username" class="form-control">
+          </div>
+          <div class="col-lg-6">
+            <label for="category">Categoria:</label>
+            <select formControlName="category" class="form-control">
+              <option value="0">Seleccionar</option>
+              <option *ngFor="let item of categoryList" [value]="item.id">{{ item.name }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <label for="password">Contraseña:</label>
+            <input type="text" formControlName="password" class="form-control">
+          </div>
+          <div class="col-lg-6">
+
+            <label for="passwordconfirm">Confirmar Contraseña:</label>
+            <input type="text" formControlName="passwordconfirm" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <label for="name">Nombre:</label>
+            <input type="text" formControlName="name" class="form-control">
+          </div>
+          <div class="col-lg-6">
+
+            <label for="lastname">Apellido:</label>
+            <input type="text" formControlName="lastname" class="form-control">
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <label for="dni">DNI:</label>
+            <input type="number" formControlName="dni" class="form-control">
+          </div>
+          <div class="col-lg-6">
+
+              <label for="phone">Telefono:</label>
+              <input type="text" formControlName="phone" class="form-control">
+
+          </div>
+        </div>
+
+        <div class="row">
+          
+          
+        </div>
+
+      </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="onSave()">Crear</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close()">Cerrar</button>
+  </div>
+</ng-template>

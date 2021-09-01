@@ -7,15 +7,21 @@
       </div>
     </a>
     <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-      Creative Tim
+      Reporte-APP
     </a>
   </div>
     <ul class="nav">
-        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
-            <a [routerLink]="[menuItem.path]">
-                <i class="nc-icon {{menuItem.icon}}"></i>
-                <p>{{menuItem.title}}</p>
+        <li  routerLinkActive="active" >
+            <a [routerLink]="'/reports'">
+                <i class="nc-icon nc-tile-56"></i>
+                <p>Reportes</p>
             </a>
         </li>
+        <li  routerLinkActive="active" >
+          <a [routerLink]="'/user'">
+              <i class="nc-icon nc-single-02"></i>
+              <p>Usuarios</p>
+          </a>
+      </li>
     </ul>
 </div>

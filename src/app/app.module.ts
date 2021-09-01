@@ -2,6 +2,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from "ngx-toastr";
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
@@ -20,16 +22,22 @@ import { AuthGuard } from "./core/guards/auth.guard";
 // Firebase services + enviorment module
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { environment } from '../environments/environment';
 
+import { FirestoreService } from "./core/services/firestore/firestore.service";
+import { CustomvalidationService } from "./core/services/customvalidation";
+import { MessagealertComponent } from './core/components/messagealert/messagealert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    MessagealertComponent
   ],
   imports: [
+    
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: false
@@ -38,11 +46,12 @@ import { environment } from '../environments/environment';
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule,
+    
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
-  providers: [AuthService, AuthGuard, SecureInnerPagesGuard],
+  providers: [AuthService, FirestoreService, AuthGuard, SecureInnerPagesGuard, CustomvalidationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

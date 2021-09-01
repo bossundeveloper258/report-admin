@@ -1,0 +1,132 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-user">
+            <div class="card-header">
+            <h5 class="card-title"></h5>
+            </div>
+            <div class="card-body">
+            <form [formGroup]="userForm" (submit)="saveUser()">
+                <div class="row">
+                    <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                            <label for="username">Usuario:</label>
+                            <input type="text" formControlName="username" id="username" class="form-control" >
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.username.touched || submitted) && userFormControl.username.errors?.required">
+                                Usuario Requerido
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="userFormControl.username.touched && userFormControl.username.errors?.email">
+                                Introduzca un email valido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" formControlName="password" class="form-control">
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.password.touched || submitted) && userFormControl.password.errors?.required">
+                                Contraseña Requerido
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="userFormControl.password.touched && userFormControl.password.errors?.invalidPassword">
+                                La contraseña debe tener un mínimo de 8 caracteres, al menos 1 letra mayúscula, 1 minúscula
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                        
+                        <div class="form-group">
+                            <label for="passwordconfirm">Confirmar Contraseña:</label>
+                            <input type="password" formControlName="passwordconfirm" class="form-control">
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.passwordconfirm.touched || submitted) && userFormControl.passwordconfirm.errors?.required">
+                                Contraseña Requerido
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.passwordconfirm.touched || submitted) && userFormControl.passwordconfirm.errors?.invalidPassword">
+                                La contraseña debe tener un mínimo de 8 caracteres, al menos 1 letra mayúscula, 1 minúscula
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.passwordconfirm.touched || submitted) && userFormControl.passwordconfirm.errors?.passwordMismatch">
+                                Contraseña debe coincidir
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" formControlName="name" class="form-control">
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.name.touched || submitted) && userFormControl.name.errors?.required">
+                                Nombre Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                        <div class="form-group">
+                            <label for="lastname">Apellido:</label>
+                            <input type="text" formControlName="lastname" class="form-control">
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.lastname.touched || submitted) && userFormControl.lastname.errors?.required">
+                                Apellido Requerido
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                            <label for="category">Categoria:</label>
+                            <select formControlName="category" class="form-control">
+                                <option value="0">Seleccionar</option>
+                                <option *ngFor="let item of categoryList" [value]="item.id">{{ item.name }}</option>
+                            </select>
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.username.touched || submitted) && userFormControl.username.errors?.required">
+                                Categoria Requerido
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label for="dni">DNI:</label>
+                            <input type="number" formControlName="dni" class="form-control">
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.dni.touched || submitted) && userFormControl.dni.errors?.required">
+                                DNI Requerido
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.dni.touched || submitted) && userFormControl.dni.errors?.maxLength">
+                                Maximo 8 digitos
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                            <label for="phone">Telefono:</label>
+                            <input type="text" formControlName="phone" class="form-control">
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.phone.touched || submitted) && userFormControl.phone.errors?.required">
+                                Telefono Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-5">
+                    <div class="col text-right">
+                        <button type="submit" class="btn btn-primary">{{txtsubmit}}</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

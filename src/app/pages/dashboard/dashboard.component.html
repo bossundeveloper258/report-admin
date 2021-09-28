@@ -25,7 +25,10 @@
                 <td>{{ report.description }}</td>
                 <td>{{ report.aggressor }}</td>
                 <td>{{ report.date }}</td>
-                <td><i class="nc-icon nc-single-copy-04"></i></td>
+                <td>
+                  <span *ngIf="report.pending == 1">Pendiente</span> &nbsp;&nbsp;&nbsp;
+                  <i class="nc-icon nc-single-copy-04"></i>
+                </td>
               </tr>
             </tbody>
           </table>

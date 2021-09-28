@@ -34,7 +34,8 @@ import { MessagealertComponent } from './core/components/messagealert/messageale
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    MessagealertComponent
+    MessagealertComponent,
+
   ],
   imports: [
     

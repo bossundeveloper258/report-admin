@@ -17,4 +17,8 @@ export class FirestorageService {
   public getFileUrl(fullPath){
     return this.storage.ref(fullPath).getDownloadURL();
   }
+
+  public deleteFolder(id){
+    return this.storage.ref(id).delete();
+  }
 }

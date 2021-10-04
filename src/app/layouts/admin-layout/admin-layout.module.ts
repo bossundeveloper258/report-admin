@@ -13,6 +13,7 @@ import { ReportsComponent }            from '../../pages/reports/reports.compone
 import { ReportEditComponent }            from '../../pages/reports/report-edit/report-edit.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthGuard } from 'app/core/guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -29,6 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserEditComponent,
     ReportsComponent,
     ReportEditComponent
+  ],providers: [
+    AuthGuard
   ]
 })
 

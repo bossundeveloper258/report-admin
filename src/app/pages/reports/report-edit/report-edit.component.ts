@@ -29,7 +29,10 @@ export class ReportEditComponent implements OnInit {
 
   save: boolean = true;
 
+  statusName: string;
+  status: number;
   imageList: Array<any> = [];
+  currentReport: Report;
 
   constructor(
       private firestoreService: FirestoreService,
@@ -71,6 +74,7 @@ export class ReportEditComponent implements OnInit {
     this.firestoreService.getReport(reportId).subscribe(
       response => {
         let report = response.payload.data() as Report;
+        this.currentReport = report;
         console.log(report);
         this.reportForm.patchValue(
           {
@@ -82,17 +86,25 @@ export class ReportEditComponent implements OnInit {
             placeIncident: report.placeIncident,
           }
         );
+        this.status = parseInt(report.status);
+        this.statusName = report.statusName;
 
         this.firestorageService.getFiles(reportId+"/").subscribe(
           res =>{
             console.log(res.items, "@@@@@@@",reportId);
             this.imageList = [];
+            let _imageList = [];
             res.items.forEach(item => {
-              console.log(item)
               this.firestorageService.getFileUrl(item.fullPath).subscribe(
                 _res => {
-                  console.log(_res, "%%%%%%%%%%%%%%%%%%")
-                  if(! this.imageList.includes(_res) ) this.imageList.push(_res);
+                  
+                  if(! _imageList.includes(_res) ){
+                    _imageList.push(_res);
+                    this.imageList.push({
+                      url : _res,
+                      name: item.name
+                    })
+                  }
                 }
               )
             })
@@ -103,6 +115,17 @@ export class ReportEditComponent implements OnInit {
     );
 
     
+  }
+
+  confirm(){
+    this.currentReport.status = '2';
+    this.currentReport.statusName = 'Recepcionado';
+    this.firestoreService.putReport( this.id , this.currentReport ).then(
+      res => {
+        this.router.navigate[('/reports')]
+
+      }
+    );
   }
 
 }

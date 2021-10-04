@@ -15,6 +15,7 @@
                 <th>Implicados</th>
                 <th>Fecha</th>
                 <th></th>
+                <th></th>
               </thead>
               <tbody>
                 <tr *ngFor="let report of reports">
@@ -26,7 +27,9 @@
                   <td>{{ report.aggressor }}</td>
                   <td>{{ report.date }}</td>
                   <td>
-                    <span *ngIf="report.pending == 1">Pendiente</span> &nbsp;&nbsp;&nbsp;
+                    <div class="alert alert-dismissible fade show" [ngClass]="{'alert-warning': report.status === 1 , 'alert-danger': report.status == 2}">{{report.statusName}}</div>
+                  </td>
+                  <td>
                     <i class="nc-icon nc-single-copy-04" [routerLink]="'/reports/'+report.id"></i>
                   </td>
                 </tr>

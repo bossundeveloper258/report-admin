@@ -20,6 +20,10 @@ export class FirestoreService {
   public getReports() {
     return this.firestore.collection('Reports').snapshotChanges();
   }
+
+  public putReport(reportId, report) {
+    return this.firestore.collection('Reports').doc(reportId).set(Object.assign({}, report));
+  }
   
   public updateCat(documentId: string, data: any) {
     return this.firestore.collection('Users').doc(documentId).set(data);

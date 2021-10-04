@@ -23,12 +23,14 @@ import { AuthGuard } from "./core/guards/auth.guard";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireStorageModule } from "@angular/fire/storage";
 import { environment } from '../environments/environment';
 
 import { FirestoreService } from "./core/services/firestore/firestore.service";
 import { CustomvalidationService } from "./core/services/customvalidation";
 import { MessagealertComponent } from './core/components/messagealert/messagealert.component';
-
+import { FirestorageService } from "./core/services/firestorage/firestorage.service";
+import { StorageService } from "./core/services/storage.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,6 @@ import { MessagealertComponent } from './core/components/messagealert/messageale
 
   ],
   imports: [
-    
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: false
@@ -47,12 +48,13 @@ import { MessagealertComponent } from './core/components/messagealert/messageale
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
-  providers: [AuthService, FirestoreService, AuthGuard, SecureInnerPagesGuard, CustomvalidationService],
+  providers: [AuthService, FirestoreService, AuthGuard, SecureInnerPagesGuard, CustomvalidationService, FirestorageService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,8 +16,8 @@
                     </div>
                     <div class="col-md-4 px-1">
                         <div class="form-group">
-                            <label for="description">Descripcion:</label>
-                            <textarea formControlName="description" class="form-control"></textarea>
+                            <label for="name">Nombre:</label>
+                            <input type="text" formControlName="name" class="form-control">
                             
                         </div>
                     </div>
@@ -33,9 +33,11 @@
                 <div class="row">
                     
                     <div class="col-md-6 pr-1">
+                        
+
                         <div class="form-group">
-                            <label for="name">Nombre:</label>
-                            <input type="text" formControlName="name" class="form-control">
+                            <label for="description">Descripcion:</label>
+                            <textarea formControlName="description" class="form-control"></textarea>
                             
                         </div>
                     </div>
@@ -63,11 +65,31 @@
 
                 <div class="row">
                     <div class="col-md-12 pr-1">
-                        <img *ngFor="let img of imageList" [src]="img" alt="" style="width: 250px;display: inline-block;">   
+                        <label for="placeIncident">Evidencias:</label>
+                        <ul>
+                            <li *ngFor="let img of imageList"><a [href]="img.url">{{img.name}}</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 pr-1">
+                        <label for="status">Estado:</label>
+                        
+                        <div class="alert alert-dismissible fade show" [ngClass]="{'alert-warning': status === 1 , 'alert-danger': status == 2}" >
+                            <span>{{ statusName }}</span>
+                        </div>
                     </div>
                 </div>
                 
             </form>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button *ngIf="status == 1" class="btn btn-success" (click)="confirm()">Confirmar Recepcion</button>
+                </div>
             </div>
         </div>
     </div>

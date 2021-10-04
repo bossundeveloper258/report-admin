@@ -1,26 +1,39 @@
-<div class="row">
-    <div class="col-lg-4">
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-        <section class="row align-items-center" style="height:  100vh;">
-            <div class="col-sm-12">
-                <form action="">
-                    <div class="row">
-                        <div class="col-sm-12 mb-3">
-                            <label for="">Usuario</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-sm-12 mb-3">
-                            <label for="">Contraseña</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-sm-12 text-center">
-                            <button type="button" class="btn btn-primary" (click)="onLogin()">Ingresar</button>
-                        </div>
-                    </div>
-                </form>
+
+
+<section class="row align-items-center" style="height:  100vh;margin: 0;">
+    <div class="col-sm-12">
+        <form [formGroup]="loginForm" class="form-login" novalidate (submit)="onLogin()">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <img src="assets/img/logo.png" alt="" width="150px">
+                </div>
             </div>
-        </section>
+            <div class="row">
+                <div class="col-sm-12 mb-3" *ngIf="errorSession">
+                    <div class="alert alert-danger alert-dismissible fade show">Usuario o Contraseña incorrecto</div>
+                </div>
+                <div class="col-sm-12 mb-3">
+                    <label for="">Usuario</label>
+                    <input type="text" class="form-control" formControlName="username">
+                    <span class="text-danger"
+                        *ngIf="(userFormControl.username.touched || submitted) && userFormControl.username.errors?.required">
+                        Usuario Requerido
+                    </span>
+                </div>
+                <div class="col-sm-12 mb-3">
+                    <label for="">Contraseña</label>
+                    <input type="password" class="form-control" formControlName="password">
+                    <span class="text-danger"
+                        *ngIf="(userFormControl.password.touched || submitted) && userFormControl.password.errors?.required">
+                        Contraseña Requerido
+                    </span>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
+</section>
+
         

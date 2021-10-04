@@ -7,4 +7,6 @@ export class Report {
     description: string;
     placeIncident: string;
     userId: string;
+    status: string;
+    statusName: string;
 }

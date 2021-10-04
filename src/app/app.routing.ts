@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/auth.guard';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
@@ -22,11 +23,11 @@ export const AppRoutes: Routes = [
   // },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: '',
-    redirectTo: 'reports',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {

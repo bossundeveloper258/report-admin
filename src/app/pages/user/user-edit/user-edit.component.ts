@@ -7,7 +7,7 @@ import { CustomvalidationService } from 'app/core/services/customvalidation';
 import { AuthService } from 'app/core/services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessagealertComponent } from 'app/core/components/messagealert/messagealert.component';
-
+import { categories } from 'app/core/interfaces/categories';
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
@@ -17,9 +17,7 @@ export class UserEditComponent implements OnInit {
 
   userForm: FormGroup;
   public id: string = null;
-  categoryList: Array<any> = [
-      {id: 1 , name : 'Usuario'}
-  ];
+  categoryList = categories;
 
   user: User;
   txtsubmit: string = "Nuevo";
@@ -123,7 +121,7 @@ export class UserEditComponent implements OnInit {
     user.dni = this.userForm.value.dni;
     user.phone = this.userForm.value.phone;
     user.category = this.userForm.value.category;
-    user.categoryName = this.categoryList.find( c => c.id == this.userForm.value.category )?.name;
+    user.categoryName = this.categoryList.find( c => c.categoryId == this.userForm.value.category )?.categoryName;
     return user;
   }
 

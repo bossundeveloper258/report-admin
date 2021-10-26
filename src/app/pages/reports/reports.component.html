@@ -9,7 +9,6 @@
               <thead class=" text-primary">
                 <th>Nombre</th>
                 <th>Telefono</th>
-                <th>DNI</th>
                 <th>Lugar de Incidente</th>
                 <th>Descripcion</th>
                 <th>Implicados</th>
@@ -21,7 +20,6 @@
                 <tr *ngFor="let report of reports">
                   <td>{{ report.name }}</td>
                   <td>{{ report.phone }}</td>
-                  <td>{{ report.name }}</td>
                   <td>{{ report.placeIncident }}</td>
                   <td>{{ report.description }}</td>
                   <td>{{ report.aggressor }}</td>
@@ -30,7 +28,7 @@
                     <div class="alert alert-dismissible fade show" [ngClass]="{'alert-warning': report.status === 1 , 'alert-danger': report.status == 2}">{{report.statusName}}</div>
                   </td>
                   <td>
-                    <i class="nc-icon nc-single-copy-04" [routerLink]="'/reports/'+report.id"></i>
+                    <i class="nc-icon nc-single-copy-04" (click)="openModal(report.id)"></i>
                   </td>
                 </tr>
               </tbody>
@@ -40,6 +38,114 @@
       </div>
     </div>
     
-  </div>
+</div>
+
+<ng-template #reportedit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Reporte</h4>
+    <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="reportForm">
+    <div class="row">
+        <div class="col-md-6 pr-1">
+          <div class="form-group">
+              <label for="cod">Codigo:</label>
+              <input type="text" formControlName="cod" id="cod" class="form-control" >
+              
+          </div>
+        </div>
+        <div class="col-md-6 pl-1">
+            
+            <div class="form-group">
+                <label for="date">Fecha:</label>
+                <input type="text" formControlName="date" class="form-control">
+                
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    <div class="row">
+        <div class="col-md-6 pr-1">
+          <div class="form-group">
+              <label for="name">Nombre:</label>
+              <input type="text" formControlName="name" class="form-control">
+              
+          </div>
+        </div>
+        <div class="col-md-6 pl-1">
+          <div class="form-group">
+              <label for="agressor">Agressor:</label>
+              <input type="text" formControlName="agressor" id="agressor" class="form-control" >
+              
+          </div>
+        </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6 pr-1">
+        <div class="form-group">
+            <label for="phone">Telefono:</label>
+            <input type="text" formControlName="phone" class="form-control">
+            
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col pr-1">
+            <div class="form-group">
+                <label for="placeIncident">Lugar Incidente:</label>
+                <input type="text" formControlName="placeIncident" class="form-control">
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        
+      <div class="col pr-1">
+          
+
+          <div class="form-group">
+              <label for="description">Descripcion:</label>
+              <textarea formControlName="description" class="form-control"></textarea>
+              
+          </div>
+      </div>
+      
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 pr-1">
+            <label for="placeIncident">Evidencias:</label>
+            <ul>
+                <li *ngFor="let img of imageList"><a [href]="img.url" target="_blank">{{img.name}}</a></li>
+            </ul>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 pr-1">
+            <label for="status">Estado:</label>
+            
+            <div class="alert alert-dismissible fade show" [ngClass]="{'alert-warning': status === 1 , 'alert-danger': status == 2}" >
+                <span>{{ statusName }}</span>
+            </div>
+        </div>
+    </div>
+    
+</form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="confirm()">Confirmar Recepcion</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close()">Cerrar</button>
+</div>
+</ng-template>
   
   

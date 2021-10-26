@@ -5,3 +5,12 @@
     border: 1px solid #000;
     border-radius: 20px;
 }
+
+.section-back{
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+.section-back:nth-child(2){
+    top: 50%;
+}

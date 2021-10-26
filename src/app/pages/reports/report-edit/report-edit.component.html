@@ -7,6 +7,14 @@
             <div class="card-body">
             <form [formGroup]="reportForm">
                 <div class="row">
+                    <div class="col-md-4 pl-1">
+                        
+                        <div class="form-group">
+                            <label for="date">Fecha:</label>
+                            <input type="text" formControlName="date" class="form-control">
+                            
+                        </div>
+                    </div>
                     <div class="col-md-4 pr-1">
                         <div class="form-group">
                             <label for="agressor">Agressor:</label>
@@ -21,14 +29,7 @@
                             
                         </div>
                     </div>
-                    <div class="col-md-4 pl-1">
-                        
-                        <div class="form-group">
-                            <label for="date">Fecha:</label>
-                            <input type="text" formControlName="date" class="form-control">
-                            
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="row">
                     
@@ -67,7 +68,7 @@
                     <div class="col-md-12 pr-1">
                         <label for="placeIncident">Evidencias:</label>
                         <ul>
-                            <li *ngFor="let img of imageList"><a [href]="img.url">{{img.name}}</a></li>
+                            <li *ngFor="let img of imageList"><a [href]="img.url" target="_blank">{{img.name}}</a></li>
                         </ul>
                         
                     </div>

@@ -85,7 +85,7 @@
                             <label for="category">Categoria:</label>
                             <select formControlName="category" class="form-control">
                                 <option value="0">Seleccionar</option>
-                                <option *ngFor="let item of categoryList" [value]="item.id">{{ item.name }}</option>
+                                <option *ngFor="let item of categoryList" [value]="item.categoryId">{{ item.categoryName }}</option>
                             </select>
                             <span class="text-danger"
                                 *ngIf="(userFormControl.username.touched || submitted) && userFormControl.username.errors?.required">

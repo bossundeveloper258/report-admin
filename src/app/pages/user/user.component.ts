@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirestoreService } from 'app/core/services/firestore/firestore.service';
 import { NgbModal,  } from '@ng-bootstrap/ng-bootstrap';
-
+import { categories } from 'app/core/interfaces/categories';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'app/core/services/auth.service';
 import { User } from 'app/core/model/user';
@@ -18,9 +18,7 @@ export class UserComponent implements OnInit{
     users: Array<any> = [];
     userForm: FormGroup;
 
-    categoryList: Array<any> = [
-        {id: 1 , name : 'Usuario'}
-    ];
+    categoryList = categories;
 
     constructor(
         private firestoreService: FirestoreService,
@@ -82,7 +80,7 @@ export class UserComponent implements OnInit{
         user.dni = this.userForm.value.dni;
         user.phone = this.userForm.value.phone;
         user.category = this.userForm.value.category;
-        user.categoryName = this.categoryList.find( c => c.id == this.userForm.value.category )?.name;
+        user.categoryName = this.categoryList.find( c => c.categoryId == this.userForm.value.category )?.categoryName;
 
         this.authService.SignUp(user).then(
             res =>{

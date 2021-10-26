@@ -88,7 +88,7 @@ export class ReportEditComponent implements OnInit {
         );
         this.status = parseInt(report.status);
         this.statusName = report.statusName;
-
+        this.imageList = [];
         this.firestorageService.getFiles(reportId+"/").subscribe(
           res =>{
             console.log(res.items, "@@@@@@@",reportId);

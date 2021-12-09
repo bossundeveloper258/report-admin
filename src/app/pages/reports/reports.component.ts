@@ -5,6 +5,7 @@ import { NgbModal,  } from '@ng-bootstrap/ng-bootstrap';
 import { Report } from 'app/core/model/report';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'app/core/model/user';
+import { report } from 'process';
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
@@ -64,11 +65,26 @@ export class ReportsComponent implements OnInit {
       response => {
         console.log(this.reports);
         this.reports = [];
-        response.forEach((data: any) => {
-            console.log(data.payload.doc.data());
-            this.reports.push( data.payload.doc.data() );
 
-        }); 
+        this.firestoreService.getUsers().subscribe(
+          responseUsers => {
+            let users = [];
+            responseUsers.forEach((data: any) => {
+              
+              users.push( data.payload.doc.data() );
+            }); 
+
+            response.forEach((data: any) => {
+              console.log(data.payload.doc.data());
+              let report = data.payload.doc.data();
+              this.reports.push( Object.assign( report, { user: users.find( u => u.uid == report.userId ) })  );
+  
+            });
+            console.log(users);
+            console.log(this.reports);
+          }
+        )
+         
       }
     );
   }

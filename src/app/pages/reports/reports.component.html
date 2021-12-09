@@ -8,6 +8,7 @@
             <table class="table">
               <thead class=" text-primary">
                 <th>Nombre</th>
+                <th>DNI</th>
                 <th>Telefono</th>
                 <th>Lugar de Incidente</th>
                 <th>Descripcion</th>
@@ -18,8 +19,9 @@
               </thead>
               <tbody>
                 <tr *ngFor="let report of reports">
-                  <td>{{ report.name }}</td>
-                  <td>{{ report.phone }}</td>
+                  <td>{{ report.user.name + ' ' + report.user.lastname}}</td>
+                  <td>{{ report.user.dni }}</td>
+                  <td>{{ report.user.phone }}</td>
                   <td>{{ report.placeIncident }}</td>
                   <td>{{ report.description }}</td>
                   <td>{{ report.aggressor }}</td>

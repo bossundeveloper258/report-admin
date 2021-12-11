@@ -31,13 +31,13 @@ import { CustomvalidationService } from "./core/services/customvalidation";
 import { MessagealertComponent } from './core/components/messagealert/messagealert.component';
 import { FirestorageService } from "./core/services/firestorage/firestorage.service";
 import { StorageService } from "./core/services/storage.service";
+
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    MessagealertComponent,
-
+    MessagealertComponent
   ],
   imports: [
     BrowserAnimationsModule,

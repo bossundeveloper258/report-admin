@@ -52,9 +52,13 @@ export class ReportEditComponent implements OnInit {
       description: [{value: '', disabled: true} ],
       name: [{value: '', disabled: true} ],
       phone: [{value: '', disabled: true} ],
-      placeIncident: [{value: '', disabled: true} ]
-      // agressor: [{value: '', disabled: true} ],
-
+      placeIncident: [{value: '', disabled: true} ],
+     
+      code: [{value: '', disabled: true} ],
+      date_created: [{value: '', disabled: true} ],
+      lastname: [{value: '', disabled: true} ],
+      dni: [{value: '', disabled: true} ],
+      category: [{value: '', disabled: true} ],
     })
 
   }
@@ -76,16 +80,32 @@ export class ReportEditComponent implements OnInit {
         let report = response.payload.data() as Report;
         this.currentReport = report;
         console.log(report);
-        this.reportForm.patchValue(
-          {
-            agressor: report.aggressor,
-            date: report.date,
-            description: report.description,
-            name: report.name,
-            phone: report.phone,
-            placeIncident: report.placeIncident,
+        
+        
+        this.firestoreService.getUser(report.userId).subscribe(
+          res => {
+            
+            
+            let currentUser = Object.assign({}, res.payload.data() as User);
+
+            console.log(currentUser)
+            this.reportForm.patchValue(
+              {
+                agressor: report.aggressor,
+                date: report.date,
+                description: report.description,
+                name: currentUser.name,
+                phone: currentUser.phone,
+                placeIncident: report.placeIncident,
+                code: report.id,
+                category: currentUser.categoryName,
+                lastname: currentUser.lastname,
+                dni: currentUser.dni,
+              }
+            );
           }
-        );
+        )
+        
         this.status = parseInt(report.status);
         this.statusName = report.statusName;
         this.imageList = [];

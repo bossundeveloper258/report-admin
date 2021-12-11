@@ -43,9 +43,9 @@ export class UserEditComponent implements OnInit {
       passwordconfirm: [{value: '', disabled: this.id != null ? true : false} , [Validators.required , this.customValidator.patternValidator()]],
       name: ['' , [Validators.required]],
       lastname: ['' , [Validators.required]],
-      dni: ['' , [Validators.required , Validators.maxLength(8)]],
-      phone: ['' , [Validators.required, ]],
-      category: [0 , [Validators.required]],
+      dni: ['' , [Validators.required , Validators.maxLength(8), Validators.pattern('^[0-9]{8}$')]],
+      phone: ['' , [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      category: [null, [Validators.required]],
 
     },{
       validators: this.customValidator.MatchPassword('password','passwordconfirm')
@@ -84,6 +84,7 @@ export class UserEditComponent implements OnInit {
 
   saveUser(){
     this.submitted = true;
+    console.log(this.userForm)
     if (this.userForm.valid) {
       // alert('Form Submitted succesfully!!!\n Check the values in browser console.');
       console.log(this.parseUserForm());
@@ -91,7 +92,7 @@ export class UserEditComponent implements OnInit {
         this.authService.SignUp( this.parseUserForm() ).then(
           res =>{
               this.openModalAlert('success');
-              this.router.navigate[('/user')]
+              this.router.navigate(['/user'])
           }
         ).catch(
           error=>{

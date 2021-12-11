@@ -34,7 +34,7 @@ export class UserComponent implements OnInit{
             passwordconfirm: ['' , [Validators.required]],
             name: ['' , [Validators.required]],
             lastname: ['' , [Validators.required]],
-            dni: ['' , [Validators.required]],
+            dni: ['' , [Validators.required , Validators.max(9)]],
             phone: ['' , [Validators.required]],
             category: [0 , [Validators.required]],
 
@@ -68,25 +68,26 @@ export class UserComponent implements OnInit{
 
     onSave(){
 
+        console.log(this.userForm.errors);
         
-        let user = new User();
+        // let user = new User();
 
-        user.uid = '';
-        user.date = new Date().toJSON("yyyy/MM/dd HH:mm");
-        user.username = this.userForm.value.username;
-        user.password = this.userForm.value.password;
-        user.name = this.userForm.value.name;
-        user.lastname = this.userForm.value.lastname;
-        user.dni = this.userForm.value.dni;
-        user.phone = this.userForm.value.phone;
-        user.category = this.userForm.value.category;
-        user.categoryName = this.categoryList.find( c => c.categoryId == this.userForm.value.category )?.categoryName;
+        // user.uid = '';
+        // user.date = new Date().toJSON("yyyy/MM/dd HH:mm");
+        // user.username = this.userForm.value.username;
+        // user.password = this.userForm.value.password;
+        // user.name = this.userForm.value.name;
+        // user.lastname = this.userForm.value.lastname;
+        // user.dni = this.userForm.value.dni;
+        // user.phone = this.userForm.value.phone;
+        // user.category = this.userForm.value.category;
+        // user.categoryName = this.categoryList.find( c => c.categoryId == this.userForm.value.category )?.categoryName;
 
-        this.authService.SignUp(user).then(
-            res =>{
-                console.log(res);
-                this.modal.dismissAll();
-            }
-        )
+        // this.authService.SignUp(user).then(
+        //     res =>{
+        //         console.log(res);
+        //         this.modal.dismissAll();
+        //     }
+        // )
     }
 }

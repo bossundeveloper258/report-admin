@@ -14,6 +14,7 @@ import { ReportEditComponent }            from '../../pages/reports/report-edit/
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from 'app/core/guards/auth.guard';
+import { GrdFilterPipe } from 'app/core/pipe/grd-filter.pipe';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { AuthGuard } from 'app/core/guards/auth.guard';
     NgbModule,
     ReactiveFormsModule,
     FormsModule
+    
   ],
   declarations: [
     DashboardComponent,
@@ -29,7 +31,8 @@ import { AuthGuard } from 'app/core/guards/auth.guard';
     NotificationsComponent,
     UserEditComponent,
     ReportsComponent,
-    ReportEditComponent
+    ReportEditComponent,
+    GrdFilterPipe
   ],providers: [
     AuthGuard
   ]

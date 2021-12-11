@@ -6,34 +6,90 @@
             </div>
             <div class="card-body">
             <form [formGroup]="reportForm">
+
                 <div class="row">
-                    <div class="col-md-4 pl-1">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="code">Codigo:</label>
+                            <input type="text" formControlName="code" class="form-control">
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
                         
                         <div class="form-group">
-                            <label for="date">Fecha:</label>
-                            <input type="text" formControlName="date" class="form-control">
+                            <label for="date_created">Fecha:</label>
+                            <input type="text" formControlName="date_created" class="form-control">
                             
                         </div>
                     </div>
-                    <div class="col-md-4 pr-1">
-                        <div class="form-group">
-                            <label for="agressor">Agressor:</label>
-                            <input type="text" formControlName="agressor" id="agressor" class="form-control" >
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-4 px-1">
+                </div>
+                <div class="row">
+                    
+                    
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Nombre:</label>
                             <input type="text" formControlName="name" class="form-control">
                             
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="lastname">Apellidos:</label>
+                            <input type="text" formControlName="lastname" class="form-control">
+                            
+                        </div>
+                    </div>
                     
                 </div>
                 <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="dni">DNI:</label>
+                            <input type="text" formControlName="dni" class="form-control">
+                            
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="phone">Telefono:</label>
+                            <input type="text" formControlName="phone" class="form-control">
+                            
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="category">Categoria:</label>
+                            <input type="text" formControlName="category" class="form-control">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7 ">
+                        <div class="form-group">
+                            <label for="placeIncident">Lugar Incidente:</label>
+                            <input type="text" formControlName="placeIncident" class="form-control">
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-5 ">
+                        <div class="form-group">
+                            <label for="date">Fecha de lo sucedido:</label>
+                            <input type="text" formControlName="date" class="form-control">
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
                     
-                    <div class="col-md-6 pr-1">
+                    <div class="col-md-6">
                         
 
                         <div class="form-group">
@@ -42,27 +98,18 @@
                             
                         </div>
                     </div>
-                    <div class="col-md-6 pl-1">
+                    <div class="col-md-6">
+
                         <div class="form-group">
-                            <label for="phone">Telefono:</label>
-                            <input type="text" formControlName="phone" class="form-control">
+                            <label for="agressor">Implicados:</label>
+                            <input type="text" formControlName="agressor" id="agressor" class="form-control" >
                             
                         </div>
+
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-md-4 pr-1">
-                        <div class="form-group">
-                            <label for="placeIncident">Lugar Incidente:</label>
-                            <input type="text" formControlName="placeIncident" class="form-control">
-                            
-                        </div>
-                        
-                    </div>
-                    
-
-                </div>
+                
 
                 <div class="row">
                     <div class="col-md-12 pr-1">
@@ -90,6 +137,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <button *ngIf="status == 1" class="btn btn-success" (click)="confirm()">Confirmar Recepcion</button>
+                    <a [routerLink]="'/reports'" class="btn btn-danger ml-3">Cerrar</a>
                 </div>
             </div>
         </div>

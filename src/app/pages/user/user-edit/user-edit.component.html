@@ -84,11 +84,11 @@
                         <div class="form-group">
                             <label for="category">Categoria:</label>
                             <select formControlName="category" class="form-control">
-                                <option value="0">Seleccionar</option>
+                                <option value="">Seleccionar</option>
                                 <option *ngFor="let item of categoryList" [value]="item.categoryId">{{ item.categoryName }}</option>
                             </select>
                             <span class="text-danger"
-                                *ngIf="(userFormControl.username.touched || submitted) && userFormControl.username.errors?.required">
+                                *ngIf="(userFormControl.category.touched || submitted) && userFormControl.category.errors?.required">
                                 Categoria Requerido
                             </span>
                         </div>
@@ -103,7 +103,7 @@
                                 DNI Requerido
                             </span>
                             <span class="text-danger"
-                                *ngIf="(userFormControl.dni.touched || submitted) && userFormControl.dni.errors?.maxLength">
+                                *ngIf="(userFormControl.dni.touched || submitted) && userFormControl.dni.errors?.pattern">
                                 Maximo 8 digitos
                             </span>
                         </div>
@@ -111,10 +111,14 @@
                     <div class="col-md-4 pl-1">
                         <div class="form-group">
                             <label for="phone">Telefono:</label>
-                            <input type="text" formControlName="phone" class="form-control">
+                            <input type="number" formControlName="phone" class="form-control">
                             <span class="text-danger"
                                 *ngIf="(userFormControl.phone.touched || submitted) && userFormControl.phone.errors?.required">
                                 Telefono Requerido
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="(userFormControl.phone.touched || submitted) && userFormControl.phone.errors?.pattern">
+                                Maximo 9 digitos
                             </span>
                         </div>
                     </div>

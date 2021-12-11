@@ -1,3 +1,8 @@
+<div class="row mb-5">
+  <div class="col-4">
+    <input type="text" [(ngModel)]="searchText" placeholder="Buscar" class="form-control">
+  </div>
+</div>
 <div class="row">
     <div class="col-sm-12">
       <div class="card">
@@ -7,30 +12,31 @@
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
-                <th>Nombre</th>
-                <th>DNI</th>
-                <th>Telefono</th>
-                <th>Lugar de Incidente</th>
-                <th>Descripcion</th>
-                <th>Implicados</th>
+                <th>Codigo</th>
                 <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>DNI</th>
+                <th>Categoria</th>
                 <th></th>
                 <th></th>
               </thead>
               <tbody>
-                <tr *ngFor="let report of reports">
-                  <td>{{ report.user.name + ' ' + report.user.lastname}}</td>
+                <!--  | grdFilter: {name: searchText, dni:searchText,  categoryName: searchText}; -->
+                <tr *ngFor="let report of reports ;  let i=index;">
+                  <td>{{ "R-" +zeroFill(i + 1 , 5) }}</td>
+                  <td>{{ report.date_created }}</td>
+                  <td>{{ report.user.name }}</td>
+                  <td>{{ report.user.lastname}}</td>
                   <td>{{ report.user.dni }}</td>
-                  <td>{{ report.user.phone }}</td>
-                  <td>{{ report.placeIncident }}</td>
-                  <td>{{ report.description }}</td>
-                  <td>{{ report.aggressor }}</td>
-                  <td>{{ report.date }}</td>
-                  <td>
-                    <div class="alert alert-dismissible fade show" [ngClass]="{'alert-warning': report.status === 1 , 'alert-danger': report.status == 2}">{{report.statusName}}</div>
+                  <td>{{ report.user.categoryName }}</td>
+                  <td width="220px">
+                    <div class="alert alert-dismissible fade show" style="width: 195px;display: inline-block;" [ngClass]="{'alert-warning': report.status === 1 , 'alert-danger': report.status == 2}">{{report.statusName}}</div>
                   </td>
                   <td>
-                    <i class="nc-icon nc-single-copy-04" (click)="openModal(report.id)"></i>
+                    <!-- <i class="nc-icon nc-single-copy-04" (click)="openModal(report.id)"></i> -->
+                    <a [routerLink]="'/reports/' +  report.id"> <i class="nc-icon nc-single-copy-04" style="font-size: x-large;"></i> </a>
+                    
                   </td>
                 </tr>
               </tbody>

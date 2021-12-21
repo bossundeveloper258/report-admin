@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { constant } from 'app/core/interfaces/constanst';
 import { StorageService } from './storage.service';
-
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,13 @@ import { StorageService } from './storage.service';
 export class AuthenticationService {
 
   constructor( 
-    private storageService: StorageService
+    private storageService: StorageService,
+    private firestore: AngularFirestore
   ) { }
 
-  login(username , password):boolean {
-    if( constant.auth.username == username  && constant.auth.password == password){
-      this.storageService.setCurrentSession(username);
-      return true;
-    }
-    return false;
+  public login(username , password): Promise <any> {
+    return this.firestore.collection('Admin').ref.where("user", "==" , username).where("password", "==" , password).get();
+    
   }
 
   logout(){

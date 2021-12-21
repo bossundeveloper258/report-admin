@@ -44,16 +44,30 @@ export class LoginComponent implements OnInit {
   onLogin(){
     this.submitted = true;
     if (this.loginForm.valid){
-      let login = this.authenticationService.login( this.loginForm.get('username').value , this.loginForm.get('password').value );
-      console.log( login )
-      if( login ){
-        this.router.navigate(['/reports'])
-      }else{
-        this.errorSession = true;
-        setTimeout(() => {
-          this.errorSession = false;
-        }, 2000);
-      }
+      this.authenticationService.login( this.loginForm.get('username').value , this.loginForm.get('password').value ).then(
+        res => {
+          
+          if(!res.empty){
+            this.storageService.setCurrentSession(this.loginForm.get('username').value);
+            this.router.navigate(['/reports'])
+          }else{
+            this.errorSession = true;
+            setTimeout(() => {
+              this.errorSession = false;
+            }, 2000);
+          }
+          
+        }
+      ).catch(
+        error => {
+          
+          this.errorSession = true;
+          setTimeout(() => {
+            this.errorSession = false;
+          }, 2000);
+        }
+      )
+      
     }
   }
 

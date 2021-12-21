@@ -1,8 +1,9 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import { Location} from '@angular/common';
 import { AuthenticationService } from 'app/core/services/authentication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     moduleId: module.id,
@@ -16,11 +17,18 @@ export class NavbarComponent implements OnInit{
     private nativeElement: Node;
     private toggleButton;
     private sidebarVisible: boolean;
-
+    modalRef: any;
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button;
-
-    constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router, private authService: AuthenticationService) {
+    @ViewChild('message') messageLogout: TemplateRef<any>;
+    
+    constructor(
+      location:Location, 
+      private renderer : Renderer2, 
+      private element : ElementRef, 
+      private router: Router, 
+      private authService: AuthenticationService,
+      private modalService:  NgbModal) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -94,7 +102,18 @@ export class NavbarComponent implements OnInit{
       }
 
       logout(){
+
+        this.modalRef  = this.modalService.open(this.messageLogout);
+        // this.authService.logout();
+      }
+
+      accept(){
         this.authService.logout();
+        this.modalService.dismissAll();
+      }
+
+      cancel(){
+        this.modalService.dismissAll();
       }
 
 }

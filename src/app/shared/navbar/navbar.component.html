@@ -31,3 +31,13 @@
     </div>
   </div>
 </nav>
+
+<ng-template #message let-modal>
+  <div class="modal-body text-center">
+    <h3>Desea salir?</h3>
+  </div>
+  <div class="modal-footer">
+    <button (click)="accept()" class="btn btn-primary">Aceptar</button>
+    <button (click)="cancel()" class="btn btn-danger">Cancelar</button>
+  </div>
+</ng-template>

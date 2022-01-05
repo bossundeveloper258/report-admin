@@ -1,4 +1,5 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, PipeTransform  } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { FirestoreService } from 'app/core/services/firestore/firestore.service'
 import { FirestorageService } from 'app/core/services/firestorage/firestorage.service'
 import { NgbModal,  } from '@ng-bootstrap/ng-bootstrap';
@@ -6,17 +7,24 @@ import { Report } from 'app/core/model/report';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'app/core/model/user';
 import { report } from 'process';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css']
+  styleUrls: ['./reports.component.css'],
+  providers: [DecimalPipe]
 })
+
+
 export class ReportsComponent implements OnInit {
 
   @ViewChild('reportedit') reportedit: TemplateRef<any>;
-
   reports: Array<any> = [];
-  searchText: string = "";
+  reports$: Observable<any>;
+  searchText: string;
   modalRef: any;
 
   reportForm: FormGroup;
@@ -38,11 +46,14 @@ export class ReportsComponent implements OnInit {
 
   reportId: string = "";
 
+  filter = new FormControl('');
+
   constructor(
     private firestoreService: FirestoreService,
     private modalService:  NgbModal,
     private formBuilder: FormBuilder,
-    private firestorageService: FirestorageService
+    private firestorageService: FirestorageService,
+    private pipe: DecimalPipe
   ) {
 
     this.reportForm = this.formBuilder.group({
@@ -55,9 +66,24 @@ export class ReportsComponent implements OnInit {
       placeIncident: [{value: '', disabled: true} ]
       // agressor: [{value: '', disabled: true} ],
 
-    })
+    });
+
+    this.reports$ = this.filter.valueChanges.pipe(
+      startWith(''),
+      map(text => this.search(text, pipe))
+    );
 
    }
+
+   
+  search(text: string, pipe: PipeTransform): Array<any> {
+    return this.reports.filter(rep => {
+      const term = text.toLowerCase();
+      return rep.user.name.toLowerCase().includes(term)
+          // || pipe.transform(rep.user.dni).includes(term)
+          // || pipe.transform(country.population).includes(term);
+    });
+  }
 
   ngOnInit(): void {
 
@@ -82,6 +108,7 @@ export class ReportsComponent implements OnInit {
             });
             console.log(users);
             console.log(this.reports);
+            this.searchText = '';
           }
         )
          

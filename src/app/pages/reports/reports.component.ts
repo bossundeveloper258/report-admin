@@ -23,7 +23,7 @@ export class ReportsComponent implements OnInit {
 
   @ViewChild('reportedit') reportedit: TemplateRef<any>;
   reports: Array<any> = [];
-  reports$: Observable<any>;
+  reports$: Array<any>;
   searchText: string;
   modalRef: any;
 
@@ -47,7 +47,9 @@ export class ReportsComponent implements OnInit {
   reportId: string = "";
 
   filter = new FormControl('');
+  filterDP = new FormControl('');
 
+  searchFilter : string = "name";
   constructor(
     private firestoreService: FirestoreService,
     private modalService:  NgbModal,
@@ -68,10 +70,10 @@ export class ReportsComponent implements OnInit {
 
     });
 
-    this.reports$ = this.filter.valueChanges.pipe(
-      startWith(''),
-      map(text => this.search(text, pipe))
-    );
+    // this.reports$ = this.filter.valueChanges.pipe(
+    //   startWith(''),
+    //   map(text => this.search(text, pipe))
+    // );
 
    }
 
@@ -108,6 +110,7 @@ export class ReportsComponent implements OnInit {
             });
             console.log(users);
             console.log(this.reports);
+            this.reports$ =this.reports;
             this.searchText = '';
           }
         )
@@ -197,6 +200,28 @@ export class ReportsComponent implements OnInit {
       return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
     }
     return number + ""; // siempre devuelve tipo cadena
+  }
+
+  searchReport(){
+    console.log(this.searchText,this.searchFilter)
+    this.reports$ = this.reports.filter(rep => {
+      const term = this.searchText.toLowerCase();
+      if( this.searchFilter == "name"){
+        return rep.user.name.toLowerCase().includes(term)
+      }
+      if( this.searchFilter == "lastname" ){
+        return rep.user.lastname.toLowerCase().includes(term)
+      }
+      if( this.searchFilter == "dni" ){
+        return rep.user.dni.toString().toLowerCase().includes(term)
+      }
+      if( this.searchFilter == "categoryName" ){
+        return rep.user.categoryName.toLowerCase().includes(term)
+      }
+      
+          // || pipe.transform(rep.user.dni).includes(term)
+          // || pipe.transform(country.population).includes(term);
+    });
   }
 
 }

@@ -1,9 +1,22 @@
-<div class="row mb-5">
-  <div class="col-4">
-    <form>
+<div class="mb-5">
+  <form class="row">
+  <div class="col-4" style="padding-top: 10px;">
+    
     <input type="text" [(ngModel)]="searchText" placeholder="Buscar" class="form-control" [formControl]="filter">
-    </form>
+    
   </div>
+  <div class="col-4" style="padding-top: 10px;">
+    <select name="" id="" [formControl]="filterDP" [(ngModel)]="searchFilter" class="form-control" >
+      <option value="name">Nombre</option>
+      <option value="lastname">Apellidos</option>
+      <option value="dni">DNI</option>
+      <option value="categoryName">Categoria</option>
+    </select>
+  </div>
+  <div class="col-4">
+    <button class="btn btn-primary" (click)="searchReport()">Buscar</button>
+  </div>
+  </form>
 </div>
 <div class="row">
     <div class="col-sm-12">
@@ -25,7 +38,7 @@
               </thead>
               <tbody>
                 <!--  | grdFilter: {name: searchText, dni:searchText,  categoryName: searchText}; -->
-                <tr *ngFor="let report of reports$ | async;  let i=index;">
+                <tr *ngFor="let report of reports$;  let i=index;">
                   <td>{{ "R-" +zeroFill(i + 1 , 5) }}</td>
                   <td>{{ report.date_created }}</td>
                   <td>{{ report.user.name }}</td>

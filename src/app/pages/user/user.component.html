@@ -1,3 +1,21 @@
+<form class="row">
+  <div class="col-4" style="padding-top: 10px;">
+    
+    <input type="text" [(ngModel)]="searchText" placeholder="Buscar" class="form-control" >
+    
+  </div>
+  <div class="col-4" style="padding-top: 10px;">
+    <select name="" id="" [(ngModel)]="searchFilter" class="form-control" >
+      <option value="name">Nombre</option>
+      <option value="lastname">Apellidos</option>
+      <option value="dni">DNI</option>
+      <option value="categoryName">Categoria</option>
+    </select>
+  </div>
+  <div class="col-4">
+    <button class="btn btn-primary" (click)="searchUser()">Buscar</button>
+  </div>
+</form>
 <div class="row">
   <div class="col-sm-12">
     <div class="card">
@@ -18,7 +36,7 @@
               <th></th>
             </thead>
             <tbody>
-              <tr *ngFor="let u of users">
+              <tr *ngFor="let u of users$">
                 <td>{{u.uid}}</td>
                 <td>{{u.date | date:'yyyy-MMM-dd' }}</td>
                 <td>{{u.name}}</td>

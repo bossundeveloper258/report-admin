@@ -20,6 +20,11 @@ export class UserComponent implements OnInit{
 
     categoryList = categories;
 
+    searchText: string;
+    searchFilter: string = "name";
+
+    users$: Array<any> = [];
+
     constructor(
         private firestoreService: FirestoreService,
         private modal:  NgbModal,
@@ -57,6 +62,8 @@ export class UserComponent implements OnInit{
 
                 }); 
 
+                this.users$ = this.users;
+
             }
         );
     }
@@ -89,5 +96,27 @@ export class UserComponent implements OnInit{
         //         this.modal.dismissAll();
         //     }
         // )
+    }
+
+    searchUser(){
+        console.log(this.searchText,this.searchFilter)
+        this.users$ = this.users.filter(rep => {
+          const term = this.searchText.toLowerCase();
+          if( this.searchFilter == "name"){
+            return rep.name.toLowerCase().includes(term)
+          }
+          if( this.searchFilter == "lastname" ){
+            return rep.lastname.toLowerCase().includes(term)
+          }
+          if( this.searchFilter == "dni" ){
+            return rep.dni.toString().toLowerCase().includes(term)
+          }
+          if( this.searchFilter == "categoryName" ){
+            return rep.categoryName.toLowerCase().includes(term)
+          }
+          
+              // || pipe.transform(rep.user.dni).includes(term)
+              // || pipe.transform(country.population).includes(term);
+        });
     }
 }

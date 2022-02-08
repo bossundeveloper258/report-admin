@@ -1,10 +1,10 @@
-<form class="row">
-  <div class="col-4" style="padding-top: 10px;">
+<div class="row">
+  <div class="col-sm-3" style="padding-top: 10px;">
     
     <input type="text" [(ngModel)]="searchText" placeholder="Buscar" class="form-control" >
     
   </div>
-  <div class="col-4" style="padding-top: 10px;">
+  <div class="col-sm-3" style="padding-top: 10px;">
     <select name="" id="" [(ngModel)]="searchFilter" class="form-control" >
       <option value="name">Nombre</option>
       <option value="lastname">Apellidos</option>
@@ -12,10 +12,11 @@
       <option value="categoryName">Categoria</option>
     </select>
   </div>
-  <div class="col-4">
-    <button class="btn btn-primary" (click)="searchUser()">Buscar</button>
+  <div class="col-sm-3">
+    <button class="btn btn-primary" (click)="searchUser()"><i class="nc-icon nc-zoom-split" ></i> Buscar</button>
+    <button class="btn btn-danger" (click)="clean()"><i class="nc-icon nc-align-left-2" ></i> Limpiar</button>
   </div>
-</form>
+</div>
 <div class="row">
   <div class="col-sm-12">
     <div class="card">

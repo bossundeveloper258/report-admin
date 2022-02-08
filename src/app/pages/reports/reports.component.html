@@ -1,11 +1,11 @@
 <div class="mb-5">
   <form class="row">
-  <div class="col-4" style="padding-top: 10px;">
+  <div class="col-sm-3" style="padding-top: 10px;">
     
     <input type="text" [(ngModel)]="searchText" placeholder="Buscar" class="form-control" [formControl]="filter">
     
   </div>
-  <div class="col-4" style="padding-top: 10px;">
+  <div class="col-sm-3" style="padding-top: 10px;">
     <select name="" id="" [formControl]="filterDP" [(ngModel)]="searchFilter" class="form-control" >
       <option value="name">Nombre</option>
       <option value="lastname">Apellidos</option>
@@ -13,8 +13,9 @@
       <option value="categoryName">Categoria</option>
     </select>
   </div>
-  <div class="col-4">
-    <button class="btn btn-primary" (click)="searchReport()">Buscar</button>
+  <div class="col-sm-3">
+    <button class="btn btn-primary" (click)="searchReport()"> <i class="nc-icon nc-zoom-split" ></i> Buscar</button>
+    <button class="btn btn-danger" (click)="clean()"><i class="nc-icon nc-align-left-2" ></i> Limpiar</button>
   </div>
   </form>
 </div>

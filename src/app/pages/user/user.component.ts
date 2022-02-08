@@ -119,4 +119,10 @@ export class UserComponent implements OnInit{
               // || pipe.transform(country.population).includes(term);
         });
     }
+
+    clean(){
+      this.searchText = "";
+      this.searchFilter = "name";
+      this.searchUser();
+    }
 }

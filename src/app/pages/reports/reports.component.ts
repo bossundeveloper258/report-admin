@@ -224,4 +224,10 @@ export class ReportsComponent implements OnInit {
     });
   }
 
+  clean(){
+    this.searchText = "";
+    this.searchFilter = "name";
+    this.searchReport();
+  }
+
 }
